@@ -11,9 +11,9 @@ import jakarta.servlet.http.HttpSession;
 @Service
 public class CommnServiceImpl implements CommonService {
 
-	@Value("${rupee.sign}")
-	public String rupeeSign;
-	
+	@Value("${currency.sign}")
+	private String currencySign;
+
 	@Override
 	public void removeSessionMessage() {
 		HttpServletRequest request = ((ServletRequestAttributes) (RequestContextHolder.getRequestAttributes()))
@@ -24,8 +24,7 @@ public class CommnServiceImpl implements CommonService {
 	}
 	
 	@Override
-	public String rupeeSign()
-	{
-		return rupeeSign;
+	public String currencySign() {
+		return currencySign;
 	}
 }

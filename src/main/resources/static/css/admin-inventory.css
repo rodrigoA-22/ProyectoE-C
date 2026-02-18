@@ -1,0 +1,65 @@
+/* ========================================
+   ESTILOS INVENTARIO ADMIN
+   ======================================== */
+
+.inventory-card {
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    overflow: hidden;
+}
+
+/* Buscador Estilizado */
+.search-area {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+    border: 1px solid #e9ecef;
+}
+
+/* Tabla de Productos */
+.table-inventory img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid #eee;
+}
+
+.table-inventory thead {
+    background-color: #2c3e50;
+    color: white;
+}
+
+.table-inventory th {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 15px;
+}
+
+.table-inventory td {
+    vertical-align: middle;
+    font-size: 0.9rem;
+}
+
+/* Badges de Inventario */
+.badge-stock {
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-weight: 700;
+}
+
+.stock-low { background-color: #fff1f0; color: #cf1322; border: 1px solid #ffa39e; }
+.stock-ok { background-color: #f6ffed; color: #389e0d; border: 1px solid #b7eb8f; }
+
+.status-active { color: #52c41a; font-weight: 700; }
+.status-inactive { color: #f5222d; font-weight: 700; }
+
+.btn-inventory {
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+}

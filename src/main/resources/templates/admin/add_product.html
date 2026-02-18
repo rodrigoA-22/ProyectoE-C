@@ -1,92 +1,107 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-	th:replace="~{base::layout(~{::section})}">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::section})}">
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+    <meta charset="UTF-8">
+    <title>Agregar Producto | Admin Panel</title>
 </head>
 <body>
-	<section>
-		<div class="container p-5 mt-3">
-			<div class="row">
-				<div class="col-md-6 offset-md-3">
-					<div class="card card-sh">
-						<div class="card-header text-center ">
-							<p class="fs-4">Add Product</p>
+    <section>
+        <link rel="stylesheet" href="/css/admin-products.css">
 
-							<th:block th:if="${session.succMsg}">
-								<p class="text-success fw-bold">[[${session.succMsg}]]</p>
-								<th:block th:text="${@commnServiceImpl.removeSessionMessage()}"></th:block>
-							</th:block>
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-6">
+                    
+                    <div class="card card-product-admin">
+                        <div class="card-header card-header-admin text-center">
+                            <h4 class="mb-0"><i class="fa-solid fa-box-open me-2"></i>Nuevo Producto</h4>
+                            
+                            <!-- Alertas de Sesión -->
+                            <div th:if="${session.succMsg}" class="alert alert-success border-0 py-2 mt-3 small">
+                                <i class="fa-solid fa-check-circle me-2"></i> [[${session.succMsg}]]
+                                <th:block th:text="${@commnServiceImpl.removeSessionMessage()}"></th:block>
+                            </div>
+                            <div th:if="${session.errorMsg}" class="alert alert-danger border-0 py-2 mt-3 small">
+                                <i class="fa-solid fa-circle-exclamation me-2"></i> [[${session.errorMsg}]]
+                                <th:block th:text="${@commnServiceImpl.removeSessionMessage()}"></th:block>
+                            </div>
+                        </div>
 
-							<th:block th:if="${session.errorMsg}">
-								<p class="text-danger fw-bold">[[${session.errorMsg}]]</p>
-								<th:block th:text="${@commnServiceImpl.removeSessionMessage()}"></th:block>
-							</th:block>
+                        <div class="card-body p-4 p-md-5">
+                            <form action="/admin/saveProduct" method="post" enctype="multipart/form-data">
+                                
+                                <!-- Título -->
+                                <div class="mb-3">
+                                    <label class="form-label-admin">Título del Producto</label>
+                                    <input type="text" name="title" class="form-control input-custom" 
+                                           placeholder="Ej: Laptop HP Pavilion 15" required>
+                                </div>
 
-						</div>
-						<div class="card-body">
-							<form action="/admin/saveProduct" method="post"
-								enctype="multipart/form-data">
-								<div class="mb-3">
-									<label>Enter Title</label> <input type="text" name="title"
-										class="form-control">
-								</div>
+                                <!-- Descripción -->
+                                <div class="mb-3">
+                                    <label class="form-label-admin">Descripción Detallada</label>
+                                    <textarea rows="3" class="form-control input-custom" name="description" 
+                                              placeholder="Características principales..." required></textarea>
+                                </div>
 
-								<div class="mb-3">
-									<label>Enter Description</label>
-									<textarea rows="3" cols="" class="form-control"
-										name="description"></textarea>
-								</div>
+                                <!-- Categoría -->
+                                <div class="mb-3">
+                                    <label class="form-label-admin">Categoría</label>
+                                    <select class="form-select input-custom" name="category" required>
+                                        <option value="" selected disabled>-- Seleccionar Categoría --</option>
+                                        <option th:each="c:${categories}" th:value="${c.name}">[[${c.name}]]</option>
+                                    </select>
+                                </div>
 
-								<div class="mb-3">
-									<label>Category</label> <select class="form-control"
-										name="category">
-										<option>--select--</option>
-										<option th:each="c:${categories}">[[${c.name}]]</option>
-									</select>
-								</div>
+                                <div class="row">
+                                    <!-- Precio -->
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label-admin">Precio Unitario</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text bg-light text-muted">
+                                                <th:block th:utext="${@commnServiceImpl.currencySign()}"></th:block>
+                                            </span>
+                                            <input type="number" step="0.01" name="price" class="form-control input-custom" required>
+                                        </div>
+                                    </div>
+                                    <!-- Stock -->
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label-admin">Cantidad en Stock</label>
+                                        <input type="number" name="stock" class="form-control input-custom" required>
+                                    </div>
+                                </div>
 
-								<div class="mb-3">
-									<label>Enter Price</label> <input type="number" name="price"
-										class="form-control">
-								</div>
-								<div class="mb-3">
-									<label>Status</label>
+                                <!-- Estado Activo/Inactivo -->
+                                <div class="mb-4">
+                                    <label class="form-label-admin">Estado de Visibilidad</label>
+                                    <div class="status-box d-flex justify-content-around">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" checked value="true" name="isActive" id="active">
+                                            <label class="form-check-label fw-bold text-success" for="active">Activo</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" value="false" name="isActive" id="inactive">
+                                            <label class="form-check-label fw-bold text-danger" for="inactive">Inactivo</label>
+                                        </div>
+                                    </div>
+                                </div>
 
-									<div class="form-check">
-										<input class="form-check-input" type="radio" checked
-											value="true" name="isActive" id="flexRadioDefault1">
-										<label class="form-check-label" for="flexRadioDefault1">
-											Active </label>
-									</div>
-									<div class="form-check">
-										<input class="form-check-input" type="radio" name="isActive"
-											value="false" id="flexRadioDefault2"> <label
-											class="form-check-label" for="flexRadioDefault2">
-											Inactive </label>
-									</div>
+                                <!-- Imagen -->
+                                <div class="mb-4">
+                                    <label class="form-label-admin">Imagen del Producto</label>
+                                    <input type="file" name="file" class="form-control input-custom" required>
+                                    <small class="text-muted">Formatos recomendados: JPG, PNG (máx. 1MB)</small>
+                                </div>
 
-								</div>
-								<div class="row">
-
-									<div class="mb-3 col">
-										<label>Enter Stock</label> <input type="text" name="stock"
-											class="form-control">
-									</div>
-
-									<div class="mb-3 col">
-										<label>Upload Image</label> <input type="file" name="file"
-											class="form-control">
-									</div>
-								</div>
-								<button class="btn btn-primary col-md-12">Submit</button>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+                                <button type="submit" class="btn btn-add-product text-white w-100 shadow-sm">
+                                    <i class="fa-solid fa-cloud-arrow-up me-2"></i> Publicar Producto
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </body>
 </html>

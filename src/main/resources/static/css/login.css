@@ -1,0 +1,93 @@
+/* ========================================
+   ESTILOS DE INICIO DE SESIÓN
+   ======================================== */
+
+.login-page {
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+    background-color: #f8f9fa;
+}
+
+.card-login {
+    border: none !important;
+    border-radius: 20px !important;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1) !important;
+    padding: 15px;
+}
+
+.card-header-login {
+    background: transparent !important;
+    border-bottom: none !important;
+    padding-bottom: 0;
+}
+
+.login-icon {
+    width: 60px;
+    height: 60px;
+    background: #e7f0ff;
+    color: #0d6efd;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px;
+    font-size: 24px;
+}
+
+.form-label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #495057;
+}
+
+.input-group-text {
+    background-color: #f8f9fa;
+    border-right: none;
+    color: #adb5bd;
+}
+
+.form-control {
+    border-left: none;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #dee2e6;
+}
+
+.input-group:focus-within .input-group-text,
+.input-group:focus-within .form-control {
+    border-color: #0d6efd;
+    color: #0d6efd;
+}
+
+.btn-login {
+    padding: 12px;
+    font-weight: 700;
+    border-radius: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.btn-login:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(13, 110, 253, 0.3);
+}
+
+.login-footer-links {
+    font-size: 0.9rem;
+}
+
+.login-footer-links a {
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+/* Animación para la imagen lateral */
+.img-side {
+    max-width: 100%;
+    height: auto;
+    filter: drop-shadow(10px 10px 20px rgba(0,0,0,0.1));
+}

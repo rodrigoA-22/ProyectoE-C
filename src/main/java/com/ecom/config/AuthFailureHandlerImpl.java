@@ -45,22 +45,22 @@ public class AuthFailureHandlerImpl extends SimpleUrlAuthenticationFailureHandle
 						userService.increaseFailedAttempt(userDtls);
 					} else {
 						userService.userAccountLock(userDtls);
-						exception = new LockedException("Your account is locked !! failed attempt 3");
+						exception = new LockedException("¡Tu cuenta está bloqueada! Intento fallido 3");
 					}
 				} else {
 
 					if (userService.unlockAccountTimeExpired(userDtls)) {
-						exception = new LockedException("Your account is unlocked !! Please try to login");
+						exception = new LockedException("¡Tu cuenta está desbloqueada! Intenta iniciar sesión.");
 					} else {
-						exception = new LockedException("your account is Locked !! Please try after sometimes");
+						exception = new LockedException("¡Tu cuenta está bloqueada! Inténtalo después de un tiempo.");
 					}
 				}
 
 			} else {
-				exception = new LockedException("your account is inactive");
+				exception = new LockedException("Su cuenta está inactiva");
 			}
 		} else {
-			exception = new LockedException("Email & password invalid");
+			exception = new LockedException("Correo electrónico y contraseña no válidos");
 		}
 
 		super.setDefaultFailureUrl("/signin?error");

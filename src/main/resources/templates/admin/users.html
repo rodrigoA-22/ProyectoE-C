@@ -1,67 +1,103 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-	th:replace="~{base::layout(~{::section})}">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::section})}">
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+    <meta charset="UTF-8">
+    <title>Gestión de Usuarios | Admin Panel</title>
 </head>
 <body>
-	<section>
-		<div class="container-fluid mt-5 p-5">
+    <section>
+        <link rel="stylesheet" href="/css/admin-users.css">
 
-			<div class="card card-sh">
-				<div class="card-header text-center">
-					<p class="fs-4" th:if="${userType==1}">Users</p>
-					<p class="fs-4" th:if="${userType==2}">Admin</p>
-					<th:block th:if="${session.succMsg}">
-						<p class="text-success fw-bold">[[${session.succMsg}]]</p>
-						<th:block th:text="${@commnServiceImpl.removeSessionMessage()}"></th:block>
-					</th:block>
+        <div class="container-fluid py-5 px-md-5">
+            <div class="user-table-card bg-white shadow-sm">
+                
+                <div class="user-table-header d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center">
+                        <div class="bg-primary text-white p-2 rounded-3 me-3">
+                            <i th:class="${userType==1} ? 'fa-solid fa-users fs-4' : 'fa-solid fa-user-shield fs-4'"></i>
+                        </div>
+                        <h4 class="mb-0 fw-bold" th:text="${userType==1 ? 'Listado de Clientes' : 'Equipo de Administradores'}">Panel</h4>
+                    </div>
 
-					<th:block th:if="${session.errorMsg}">
-						<p class="text-danger fw-bold">[[${session.errorMsg}]]</p>
-						<th:block th:text="${@commnServiceImpl.removeSessionMessage()}"></th:block>
-					</th:block>
-				</div>
-				<div class="card-body">
-					<table class="table">
-						<thead>
-							<tr>
-								<th scope="col">Sl No</th>
-								<th scope="col">Profile</th>
-								<th scope="col">Name</th>
-								<th scope="col">Email</th>
-								<th scope="col">Mobile No</th>
-								<th scope="col">Address</th>
-								<th scope="col">Status</th>
-								<th scope="col">Action</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr th:each="u,c:${users}">
-								<th scope="row">[[${c.count}]]</th>
-								<td><img th:src="@{'/img/profile_img/'+${u.profileImage}}"
-									width="70px" height="70px"></td>
-								<td>[[${u.name}]]</td>
-								<td>[[${u.email}]]</td>
-								<td>[[${u.mobileNumber}]]</td>
-								<td>[[${u.address+','+u.city+','+u.state+','+u.pincode}]]</td>
-								<td>[[${u.isEnable}]]</td>
-								<td><a th:href="@{'/admin/updateSts?status=true&id='+${u.id}}+'&type='+${userType}"
-									class="btn btn-sm btn-primary">Active</a> 
-										
-									<a
-									th:href="@{'/admin/updateSts?status=false&id='+${u.id}}+'&type='+${userType}"
-									class="btn btn-sm btn-danger">
-										Inactive</a></td>
-							</tr>
+                    <!-- Botón Volver -->
+                    <a href="/admin/" class="btn btn-outline-secondary btn-sm rounded-pill">
+                        <i class="fa-solid fa-arrow-left me-1"></i> Dashboard
+                    </a>
+                </div>
 
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
+                <div class="card-body p-0">
+                    <!-- Bloque de Mensajes Anti-Error 500 -->
+                    <div th:if="${session != null}" class="px-4 pt-3">
+                        <div th:if="${session.succMsg != null}" class="alert alert-success border-0 py-2 small shadow-sm">
+                            <i class="fa-solid fa-circle-check me-2"></i> [[${session.succMsg}]]
+                            <th:block th:text="${@commnServiceImpl.removeSessionMessage()}"></th:block>
+                        </div>
+                        <div th:if="${session.errorMsg != null}" class="alert alert-danger border-0 py-2 small shadow-sm">
+                            <i class="fa-solid fa-triangle-exclamation me-2"></i> [[${session.errorMsg}]]
+                            <th:block th:text="${@commnServiceImpl.removeSessionMessage()}"></th:block>
+                        </div>
+                    </div>
 
-	</section>
+                    <div class="table-responsive">
+                        <table class="table table-hover table-users mb-0">
+                            <thead>
+                                <tr>
+                                    <th class="ps-4">Nº</th>
+                                    <th class="text-center">Perfil</th>
+                                    <th>Nombre Completo</th>
+                                    <th>Contacto</th>
+                                    <th>Dirección Completa</th>
+                                    <th class="text-center">Estado</th>
+                                    <th class="text-end pe-4">Acciones de Acceso</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="u,c:${users}">
+                                    <td class="ps-4">[[${c.count}]]</td>
+                                    <td class="text-center">
+                                        <img th:src="@{'/img/profile_img/'+${u.profileImage}}" class="user-profile-img shadow-sm" alt="u">
+                                    </td>
+                                    <td class="fw-bold text-dark">[[${u.name}]]</td>
+                                    <td>
+                                        <div class="small">
+                                            <i class="fa-solid fa-envelope me-1 text-muted"></i> [[${u.email}]]<br>
+                                            <i class="fa-solid fa-phone me-1 text-muted"></i> [[${u.mobileNumber}]]
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="address-text">
+                                            [[${u.address}]], [[${u.district}]]<br>
+                                            <span class="small opacity-75">[[${u.department}]] - [[${u.pincode}]]</span>
+                                        </span>
+                                    </td>
+                                    <td class="text-center">
+                                        <span th:if="${u.isEnable}" class="status-pill status-enabled">ACTIVO</span>
+                                        <span th:unless="${u.isEnable}" class="status-pill status-disabled">BLOQUEADO</span>
+                                    </td>
+                                    <td class="text-end pe-4">
+                                        <div class="btn-group shadow-sm rounded">
+                                            <a th:href="@{'/admin/updateSts?status=true&id='+${u.id}+'&type='+${userType}}"
+                                               class="btn btn-success btn-status" title="Habilitar">
+                                               <i class="fa-solid fa-user-check"></i>
+                                            </a>
+                                            <a th:href="@{'/admin/updateSts?status=false&id='+${u.id}+'&type='+${userType}}"
+                                               class="btn btn-danger btn-status" title="Bloquear">
+                                               <i class="fa-solid fa-user-slash"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card-footer bg-white border-0 py-4 px-4 text-muted small">
+                    <i class="fa-solid fa-circle-info me-1 text-primary"></i> 
+                    Usa los botones de acción para permitir o revocar el acceso de los usuarios al sistema.
+                </div>
+            </div>
+        </div>
+    </section>
 </body>
 </html>

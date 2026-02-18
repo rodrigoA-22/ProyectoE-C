@@ -1,126 +1,127 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
 	th:replace="~{base::layout(~{::section})}">
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<meta charset="UTF-8">
+<title>Realizar Pedido</title>
 </head>
 <body>
-	<section>
+	<section class="checkout-page">
+		<!-- 1. ESTILOS PARA LOS ERRORES (Dentro de la section para que funcionen) -->
+		<style>
+			.checkout-section { background: #fff; padding: 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); height: 100%; }
+			.section-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 20px; color: #333; border-bottom: 2px solid #f8f9fa; padding-bottom: 10px; }
+			.btn-checkout { background: #0d6efd; color: white; padding: 12px; border-radius: 8px; font-weight: 600; border: none; transition: all 0.3s; }
+			.btn-checkout:hover { background: #0b5ed7; transform: translateY(-2px); }
+			
+			/* Estilos de validación */
+			label.error { color: #dc3545; font-size: 0.8rem; margin-top: 5px; font-weight: 500; display: block; }
+			input.error, select.error { border-color: #dc3545 !important; background-color: #fff8f8; }
+			input.valid, select.valid { border-color: #198754 !important; }
+		</style>
 
-		<div class="container mt-5 p-5">
-			<form action="/user/save-order" method="post" id="orders" novalidate>
+		<div class="container mt-5 p-2 p-md-5">
+			<div class="row mb-4">
+				<div class="col-12">
+					<h1 class="page-title text-center fw-bold">Finalizar Compra</h1>
+				</div>
+			</div>
+
+			<!-- 2. QUITAMOS 'novalidate' para permitir que el script tome el control -->
+			<form action="/user/save-order" method="post" id="orders">
 				<div class="row">
-
-					<div class="col-md-6">
-
-
-						<div class="mb-3 row">
-							<p class="text-center fs-4">Billing Address</p>
-							<hr>
-							<div class="col p-1">
-								<label>First Name</label> <input type="text" name="firstName" required
-									class="form-control mt-1">
-							</div>
-							<div class="col p-1">
-								<label>Last Name</label> <input type="text" name="lastName" required
-									class="form-control mt-1">
-							</div>
-						</div>
-
-						<div class="mb-3 row">
-							<div class="col p-1">
-								<label>Email</label> <input type="email" name="email" required
-									class="form-control col">
-							</div>
-							<div class="col p-1">
-								<label>Mobile Number</label> <input type="text" name="mobileNo" required
-									class="form-control col ms-2">
-							</div>
-						</div>
-
-						<div class="mb-3 row">
-							<div class="col p-1">
-								<label>Address</label> <input type="text" name="address" required
-									class="form-control col">
-							</div>
-							<div class="col p-1">
-								<label>City</label> <input type="text" name="city" required
-									class="form-control col ms-2">
-							</div>
-						</div>
-						<div class="mb-3 row">
-							<div class="col p-1">
-								<label>State</label> <input type="text" name="state" required
-									class="form-control col">
-							</div>
-							<div class="col p-1">
-								<label>Pincode</label> <input type="number" name="pincode" required
-									class="form-control col ms-2">
-							</div>
-						</div>
-						<!-- </form> -->
-
-					</div>
-					<div class="col-md-6">
-						<p class="text-center fs-4">Payment Type</p>
-						<hr>
-						<div class="card">
-							<div class="card-body">
-								<table class="table table-borderless">
-									<tbody>
-										<tr>
-											<td>Total price</td>
-											<td>:</td>
-											<td><th:block th:utext="${@commnServiceImpl.rupeeSign()}"></th:block> [[${orderPrice}]]</td>
-										</tr>
-										<tr>
-											<td>Delivery Fee</td>
-											<td>:</td>
-											<td><th:block th:utext="${@commnServiceImpl.rupeeSign()}"></th:block> 250</td>
-										</tr>
-
-										<tr>
-											<td>Tax</td>
-											<td>:</td>
-											<td><th:block th:utext="${@commnServiceImpl.rupeeSign()}"></th:block> 100</td>
-										</tr>
-
-										<tr class="border-top">
-											<td>Total Price</td>
-											<td>:</td>
-											<td><th:block th:utext="${@commnServiceImpl.rupeeSign()}"></th:block> [[${totalOrderPrice}]]</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</div>
-
-						<div class="card shadow p-3 mb-5 mt-2 bg-body-tertiary rounded">
-
-							<div class="card-body">
-								<!-- <form action="/login" method="post"> -->
-								<div class="mb-3">
-									<label class="form-label">Select Payment Type</label> <select required
-										name="paymentType" class="form-control">
-										<option value="">--select--</option>
-										<option value="COD">Cash On Delivery</option>
-										<option value="ONLINE">Online Payment</option>
-									</select>
-
+					<!-- Dirección de Envío -->
+					<div class="col-lg-7 mb-4">
+						<div class="checkout-section">
+							<h2 class="section-title">
+								<i class="fa-solid fa-location-dot me-2 text-primary"></i>Datos de Entrega
+							</h2>
+							
+							<div class="row">
+								<div class="col-md-6 mb-3">
+									<label class="form-label">Nombre</label>
+									<input type="text" name="firstName" class="form-control" placeholder="Ej: Juan">
 								</div>
+								<div class="col-md-6 mb-3">
+									<label class="form-label">Apellido</label>
+									<input type="text" name="lastName" class="form-control" placeholder="Ej: Pérez">
+								</div>
+							</div>
 
-								<button class="btn bg-primary text-white col-md-12">Place
-									Order</button>
+							<div class="row">
+								<div class="col-md-7 mb-3">
+									<label class="form-label">Correo Electrónico</label>
+									<input type="email" name="email" class="form-control" placeholder="juan@correo.com">
+								</div>
+								<div class="col-md-5 mb-3">
+									<label class="form-label">Celular (9 dígitos)</label>
+									<input type="text" name="mobileNo" class="form-control" placeholder="987654321">
+								</div>
+							</div>
 
+							<div class="mb-3">
+								<label class="form-label">Dirección Exacta</label>
+								<input type="text" name="address" class="form-control" placeholder="Av. Siempre Viva 123">
+							</div>
+
+							<div class="row">
+								<div class="col-md-4 mb-3">
+									<label class="form-label">Distrito</label>
+									<input type="text" name="district" class="form-control">
+								</div>
+								<div class="col-md-4 mb-3">
+									<label class="form-label">Departamento</label>
+									<input type="text" name="department" class="form-control">
+								</div>
+								<div class="col-md-4 mb-3">
+									<label class="form-label">Cód. Postal</label>
+									<input type="number" name="pincode" class="form-control">
+								</div>
 							</div>
 						</div>
 					</div>
 
+					<!-- Resumen y Pago -->
+					<div class="col-lg-5 mb-4">
+						<div class="checkout-section">
+							<h2 class="section-title">
+								<i class="fa-solid fa-receipt me-2 text-primary"></i>Resumen
+							</h2>
+							<div class="p-3 bg-light rounded-3 mb-4">
+								<div class="d-flex justify-content-between mb-2">
+									<span>Subtotal:</span>
+									<span>[[${@commnServiceImpl.currencySign()}]] [[${orderPrice}]]</span>
+								</div>
+								<div class="d-flex justify-content-between mb-2 text-muted small">
+									<span>Envío:</span>
+									<span>+ [[${@commnServiceImpl.currencySign()}]] 250</span>
+								</div>
+								<hr>
+								<div class="d-flex justify-content-between">
+									<span class="fw-bold">Total:</span>
+									<span class="fw-bold fs-4 text-primary">[[${@commnServiceImpl.currencySign()}]] [[${totalOrderPrice}]]</span>
+								</div>
+							</div>
+
+							<h2 class="section-title">
+								<i class="fa-solid fa-wallet me-2 text-primary"></i>Método de Pago
+							</h2>
+							<div class="mb-4">
+								<select name="paymentType" class="form-select form-select-lg">
+									<option value="">Seleccione pago...</option>
+									<option value="COD">Pago contra entrega</option>
+									<option value="ONLINE">Pago en línea</option>
+								</select>
+							</div>
+
+							<button type="submit" class="btn btn-checkout w-100 fs-5">
+								<i class="fa-solid fa-shield-check me-2"></i>Confirmar Pedido
+							</button>
+						</div>
+					</div>
 				</div>
 			</form>
 		</div>
-
 	</section>
 </body>
 </html>

@@ -1,0 +1,140 @@
+/* ========================================
+   MIS PEDIDOS - ESTILOS
+   ======================================== */
+
+/* Tabla de pedidos */
+.orders-table {
+	background: #fff;
+	border: 1px solid #0000001A !important;
+	border-radius: 12px;
+	overflow: hidden;
+	box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.orders-table thead {
+	background-color: #F8F9FA;
+}
+
+.orders-table thead th {
+	font-weight: 600;
+	color: #000;
+	padding: 16px;
+	border: 1px solid #DEE2E6 !important;
+	font-size: 14px;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+}
+
+.orders-table tbody td,
+.orders-table tbody th {
+	padding: 16px;
+	vertical-align: middle;
+	border: 1px solid #DEE2E6 !important;
+}
+
+.orders-table tbody tr {
+	transition: background-color 0.3s ease;
+}
+
+.orders-table tbody tr:hover {
+	background-color: #FAFAFA;
+}
+
+/* ID de orden */
+.order-id {
+	font-weight: 600;
+	color: #000;
+	font-family: 'Courier New', monospace;
+}
+
+/* Detalles del pedido */
+.order-details {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	font-size: 14px;
+}
+
+.order-details span {
+	color: #000;
+}
+
+/* Badge de estado */
+.status-badge {
+	display: inline-block;
+	padding: 6px 14px;
+	border-radius: 20px;
+	font-size: 13px;
+	font-weight: 500;
+	background-color: #F0F0F0;
+	color: #000;
+}
+
+/* Alertas */
+.alert {
+	border-radius: 12px;
+	border: none;
+	padding: 16px 20px;
+	margin-bottom: 24px;
+}
+
+.alert-success {
+	background-color: #D1FAE5;
+	color: #065F46;
+}
+
+.alert-danger {
+	background-color: #FEE2E2;
+	color: #991B1B;
+}
+
+/* Botones */
+.btn-danger {
+	background-color: #DC2626;
+	border-color: #DC2626;
+	transition: all 0.3s ease;
+}
+
+.btn-danger:hover {
+	background-color: #B91C1C;
+	border-color: #B91C1C;
+	transform: translateY(-2px);
+}
+
+.btn-secondary {
+	background-color: #E5E7EB;
+	border-color: #E5E7EB;
+	color: #6B7280;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+	.orders-table {
+		font-size: 13px;
+	}
+	
+	.orders-table thead th {
+		font-size: 12px;
+		padding: 12px 8px;
+	}
+	
+	.orders-table tbody td,
+	.orders-table tbody th {
+		padding: 12px 8px;
+	}
+	
+	.order-details {
+		font-size: 12px;
+	}
+	
+	.status-badge {
+		font-size: 11px;
+		padding: 4px 10px;
+	}
+}
+
+@media (max-width: 576px) {
+	.container {
+		padding: 20px !important;
+	}
+}

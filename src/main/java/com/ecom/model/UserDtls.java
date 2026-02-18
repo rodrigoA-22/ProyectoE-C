@@ -17,7 +17,7 @@ import lombok.Setter;
 @Setter
 @Entity
 public class UserDtls {
-
+	//Por q poner city y state? chatumare
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -29,10 +29,10 @@ public class UserDtls {
 	private String email;
 
 	private String address;
-
-	private String city;
-
-	private String state;
+	//cambio city a district
+	private String district;
+	//cambio de state a department
+	private String department;
 
 	private String pincode;
 

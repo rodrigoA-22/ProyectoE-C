@@ -1,0 +1,93 @@
+/* ========================================
+   ESTILOS DETALLE DE PRODUCTO
+   ======================================== */
+
+.product-detail-card {
+    background: #ffffff;
+    border-radius: 20px;
+    border: none;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+    overflow: hidden;
+}
+
+/* Contenedor de Imagen */
+.image-zoom-container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.product-main-img {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    transition: transform 0.5s ease;
+}
+
+.image-zoom-container:hover .product-main-img {
+    transform: scale(1.05);
+}
+
+/* Etiquetas y Textos */
+.product-category-tag {
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #6c757d;
+    letter-spacing: 1px;
+}
+
+.product-price-new {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #0d6efd;
+}
+
+.product-price-old {
+    font-size: 1.1rem;
+    color: #adb5bd;
+    text-decoration: line-through;
+}
+
+/* Iconos de Confianza */
+.trust-icon-box {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 15px 10px;
+    transition: background 0.3s;
+}
+
+.trust-icon-box:hover {
+    background: #f1f3f5;
+}
+
+.trust-icon-box i {
+    margin-bottom: 10px;
+}
+
+.trust-icon-box p {
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-bottom: 0;
+    line-height: 1.2;
+}
+
+/* Botón de Compra */
+.btn-add-cart {
+    padding: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: all 0.3s;
+}
+
+.btn-add-cart:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(220, 53, 69, 0.3);
+}

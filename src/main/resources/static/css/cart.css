@@ -1,0 +1,106 @@
+/* ========================================
+   ESTILOS DEL CARRITO OPTIMIZADOS
+   ======================================== */
+
+.cart-page {
+    min-height: 85vh;
+    background-color: #f9f9f9; /* Fondo suave para resaltar la tarjeta */
+    padding-bottom: 50px;
+}
+
+/* Tarjeta con diseño elevado */
+.card-sh {
+    border: none !important;
+    border-radius: 12px !important;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05) !important;
+    overflow: hidden;
+}
+
+/* ARREGLO DE IMÁGENES: Forzado de tamaño */
+.product-img-cart {
+    width: 80px !important;
+    height: 80px !important;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid #eee;
+    transition: transform 0.2s ease;
+}
+
+.product-img-cart:hover {
+    transform: scale(1.05);
+}
+
+/* Control de Cantidad tipo Píldora */
+.quantity-control {
+    display: inline-flex;
+    align-items: center;
+    background: #f1f3f5;
+    border-radius: 30px;
+    padding: 5px 12px;
+    border: 1px solid #e9ecef;
+}
+
+.quantity-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background-color: #fff;
+    color: #333;
+    text-decoration: none !important;
+    font-size: 12px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    transition: all 0.2s ease;
+}
+
+.quantity-btn:hover {
+    background-color: #0d6efd;
+    color: #fff !important;
+}
+
+.quantity-value {
+    font-weight: 600;
+    min-width: 35px;
+    text-align: center;
+    color: #212529;
+}
+
+/* Ajustes de Tabla */
+.table {
+    margin-bottom: 0;
+    vertical-align: middle !important;
+}
+
+.table thead th {
+    background-color: #f8f9fa;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    font-weight: 700;
+    color: #6c757d;
+    border-top: none;
+    padding: 15px;
+}
+
+.table tbody td {
+    padding: 20px 15px;
+    border-bottom: 1px solid #f1f3f5;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container-fluid {
+        padding: 10px !important;
+    }
+    
+    .product-img-cart {
+        width: 60px !important;
+        height: 60px !important;
+    }
+    
+    .quantity-control {
+        padding: 4px 8px;
+    }
+}

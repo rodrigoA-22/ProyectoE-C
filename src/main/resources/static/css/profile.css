@@ -1,0 +1,110 @@
+/* ========================================
+   ESTILOS DE PERFIL DE USUARIO
+   ======================================== */
+
+.profile-card {
+    background: #ffffff;
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+    overflow: hidden;
+    margin-bottom: 3rem;
+}
+
+/* Encabezado con gradiente moderno */
+.profile-header {
+    background: linear-gradient(135deg, #0d6efd 0%, #003d99 100%);
+    padding: 50px 20px;
+    text-align: center;
+    color: white;
+}
+
+.profile-header h2 {
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+/* Imagen de perfil circular flotante */
+.profile-img-container {
+    position: relative;
+    margin-top: -65px;
+    margin-bottom: 25px;
+}
+
+.profile-img {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 6px solid #fff;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease;
+}
+
+.profile-img:hover {
+    transform: scale(1.05);
+}
+
+/* Formulario y Secciones */
+.section-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #495057;
+    letter-spacing: 1px;
+    border-bottom: 2px solid #f1f3f5;
+    padding-bottom: 10px;
+    margin-top: 1.5rem;
+}
+
+.form-label {
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: #6c757d;
+    margin-bottom: 8px;
+}
+
+.form-control {
+    border-radius: 10px;
+    padding: 12px 15px;
+    border: 1px solid #e9ecef;
+    transition: all 0.2s;
+}
+
+.form-control:focus {
+    box-shadow: 0 0 0 4px rgba(13, 110, 253, 0.1);
+    border-color: #0d6efd;
+}
+
+.form-control:read-only {
+    background-color: #f8f9fa;
+    cursor: not-allowed;
+}
+
+/* Botones con estilo */
+.btn-update {
+    border-radius: 12px;
+    padding: 12px 30px;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+}
+
+.btn-primary-custom {
+    background-color: #0d6efd;
+    border: none;
+    color: white;
+}
+
+.btn-primary-custom:hover {
+    background-color: #0b5ed7;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(13, 110, 253, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container { padding: 15px; }
+    .profile-header { padding: 30px 15px; }
+}

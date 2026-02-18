@@ -145,7 +145,7 @@ public class HomeController {
 		Boolean existsEmail = userService.existsEmail(user.getEmail());
 
 		if (existsEmail) {
-			session.setAttribute("errorMsg", "Email already exist");
+			session.setAttribute("errorMsg", "El correo electrónico ya existe");
 		} else {
 			String imageName = file.isEmpty() ? "default.jpg" : file.getOriginalFilename();
 			user.setProfileImage(imageName);
@@ -161,9 +161,9 @@ public class HomeController {
 //					System.out.println(path);
 					Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
 				}
-				session.setAttribute("succMsg", "Register successfully");
+				session.setAttribute("succMsg", "Registro exitoso");
 			} else {
-				session.setAttribute("errorMsg", "something wrong on server");
+				session.setAttribute("errorMsg", "algo anda mal en el servidor");
 			}
 		}
 
@@ -184,7 +184,7 @@ public class HomeController {
 		UserDtls userByEmail = userService.getUserByEmail(email);
 
 		if (ObjectUtils.isEmpty(userByEmail)) {
-			session.setAttribute("errorMsg", "Invalid email");
+			session.setAttribute("errorMsg", "Correo electrónico no válido");
 		} else {
 
 			String resetToken = UUID.randomUUID().toString();
@@ -198,9 +198,9 @@ public class HomeController {
 			Boolean sendMail = commonUtil.sendMail(url, email);
 
 			if (sendMail) {
-				session.setAttribute("succMsg", "Please check your email..Password Reset link sent");
+				session.setAttribute("succMsg", "Por favor revise su correo electrónico. Enlace de restablecimiento de contraseña enviado.");
 			} else {
-				session.setAttribute("errorMsg", "Somethong wrong on server ! Email not send");
+				session.setAttribute("errorMsg", "¡Algo mal en el servidor! No se envía el correo electrónico.");
 			}
 		}
 
@@ -213,7 +213,7 @@ public class HomeController {
 		UserDtls userByToken = userService.getUserByToken(token);
 
 		if (userByToken == null) {
-			m.addAttribute("msg", "Your link is invalid or expired !!");
+			m.addAttribute("msg", "¡¡Tu enlace no es válido o ha expirado!!");
 			return "message";
 		}
 		m.addAttribute("token", token);
@@ -226,14 +226,14 @@ public class HomeController {
 
 		UserDtls userByToken = userService.getUserByToken(token);
 		if (userByToken == null) {
-			m.addAttribute("errorMsg", "Your link is invalid or expired !!");
+			m.addAttribute("errorMsg", "¡¡Tu enlace no es válido o ha expirado!!");
 			return "message";
 		} else {
 			userByToken.setPassword(passwordEncoder.encode(password));
 			userByToken.setResetToken(null);
 			userService.updateUser(userByToken);
 			// session.setAttribute("succMsg", "Password change successfully");
-			m.addAttribute("msg", "Password change successfully");
+			m.addAttribute("msg", "Cambio de contraseña exitoso");
 
 			return "message";
 		}

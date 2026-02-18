@@ -1,122 +1,118 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-	th:replace="~{base::layout(~{::section})}">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::section})}">
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+    <meta charset="UTF-8">
+    <title>Crea tu cuenta | Ecom Store</title>
 </head>
 <body>
-	<section>
-		<div class="container mt-5 p-5">
-			<div class="row">
-				<div class="col-md-5 p-5">
-					<img alt="" src="img/ecom.png" width="100%" height="400px">
+	<section class="register-page py-5">
+        <link rel="stylesheet" href="/css/register.css">
+
+		<div class="container">
+			<div class="row align-items-center">
+				<!-- Imagen Lateral -->
+				<div class="col-md-5 d-none d-lg-block text-center">
+					<img th:src="@{/img/ecom.png}" alt="Registro" class="img-fluid" style="max-height: 450px;">
+                    <h2 class="mt-4 fw-bold">Únete a nuestra comunidad</h2>
+                    <p class="text-muted">Disfruta de ofertas exclusivas y un seguimiento detallado de tus pedidos.</p>
 				</div>
-				<div class="col-md-7 p-2">
-					<div class="card shadow p-3 mb-5 bg-body-tertiary rounded">
-						<div class="card-header text-center">
-							<p class="fs-4 text-center">Register</p>
-							<th:block th:if="${session.succMsg}">
-								<p class="text-success fw-bold">[[${session.succMsg}]]</p>
-								<th:block th:text="${@commnServiceImpl.removeSessionMessage()}"></th:block>
-							</th:block>
 
-							<th:block th:if="${session.errorMsg}">
-								<p class="text-danger fw-bold">[[${session.errorMsg}]]</p>
+				<!-- Formulario -->
+				<div class="col-lg-7">
+					<div class="card card-register p-4">
+						<div class="card-header bg-white border-0 text-center">
+                            <div class="register-icon">
+                                <i class="fa-solid fa-user-plus"></i>
+                            </div>
+							<h3 class="fw-bold mb-0">Crear Cuenta</h3>
+							
+							<!-- Alertas -->
+							<div th:if="${session.succMsg}" class="alert alert-success border-0 mt-3 small shadow-sm">
+								<i class="fa-solid fa-circle-check me-2"></i> [[${session.succMsg}]]
 								<th:block th:text="${@commnServiceImpl.removeSessionMessage()}"></th:block>
-							</th:block>
+							</div>
+							<div th:if="${session.errorMsg}" class="alert alert-danger border-0 mt-3 small shadow-sm">
+								<i class="fa-solid fa-circle-exclamation me-2"></i> [[${session.errorMsg}]]
+								<th:block th:text="${@commnServiceImpl.removeSessionMessage()}"></th:block>
+							</div>
 						</div>
+
 						<div class="card-body">
-							<form action="/saveUser" enctype="multipart/form-data" id="userRegister" novalidate
-								method="post">
-								<div class="row">
-									<div class="col">
-										<label class="form-label">Full Name</label> <input required
-											class="form-control" name="name" type="text">
+                            <!-- Nota: Quitamos novalidate para que el script.js maneje la validación -->
+							<form action="/saveUser" enctype="multipart/form-data" id="userRegister" method="post">
+								
+                                <p class="text-primary fw-bold small mb-3 border-bottom pb-1">DATOS PERSONALES</p>
+								<div class="row mb-3">
+									<div class="col-md-6">
+										<label class="form-label">Nombre completo</label> 
+                                        <input class="form-control" name="name" type="text" placeholder="Ej: Juan Pérez">
 									</div>
-
-									<div class="col">
-										<label class="form-label">Mobile Number</label> <input
-											required class="form-control" name="mobileNumber"
-											type="number">
+									<div class="col-md-6">
+										<label class="form-label">Número de teléfono</label> 
+                                        <input class="form-control" name="mobileNumber" type="text" placeholder="999888777">
 									</div>
-
 								</div>
 
 								<div class="mb-3">
-									<label class="form-label">Email</label> <input required
-										class="form-control" name="email" type="email">
+									<label class="form-label">Correo Electrónico</label> 
+                                    <input class="form-control" name="email" type="email" placeholder="juan@correo.com">
 								</div>
 
-
-								<div class="row">
-									<div class="col">
-										<label class="form-label">Address</label> <input required
-											class="form-control" name="address" type="text">
+                                <p class="text-primary fw-bold small mb-3 border-bottom pb-1 mt-4">UBICACIÓN</p>
+								<div class="row mb-3">
+									<div class="col-md-8">
+										<label class="form-label">Dirección de Envío</label> 
+                                        <input class="form-control" name="address" type="text" placeholder="Av. Principal 123">
 									</div>
-
-									<div class="col">
-										<label class="form-label">City</label> <input required
-											class="form-control" name="city" type="text">
+									<div class="col-md-4">
+										<label class="form-label">Distrito</label> 
+                                        <input class="form-control" name="district" type="text">
 									</div>
-
 								</div>
 
-								<div class="row">
-									<div class="col">
-										<label class="form-label">State</label> <input required
-											class="form-control" name="state" type="text">
+								<div class="row mb-3">
+									<div class="col-md-6">
+										<label class="form-label">Departamento</label> 
+                                        <input class="form-control" name="department" type="text">
 									</div>
-
-									<div class="col">
-										<label class="form-label">Pincode</label> <input required
-											class="form-control" name="pincode" type="number">
+									<div class="col-md-6">
+										<label class="form-label">Código Postal</label> 
+                                        <input class="form-control" name="pincode" type="text">
 									</div>
-
 								</div>
 
-
-								<div class="row">
-									<div class="col">
-										<label class="form-label">Password</label> <input required
-											class="form-control" name="password" type="password" id="pass">
+                                <p class="text-primary fw-bold small mb-3 border-bottom pb-1 mt-4">SEGURIDAD Y PERFIL</p>
+								<div class="row mb-3">
+									<div class="col-md-6">
+										<label class="form-label">Contraseña</label> 
+                                        <input class="form-control" name="password" type="password" id="pass" placeholder="••••••••">
 									</div>
-
-									<div class="col">
-										<label class="form-label">Confirm Password</label> <input
-											required class="form-control" name="confirmpassword"
-											type="password">
+									<div class="col-md-6">
+										<label class="form-label">Confirmar Contraseña</label> 
+                                        <input class="form-control" name="confirmpassword" type="password" placeholder="••••••••">
 									</div>
-
 								</div>
 
-
-
-								<div class="mb-3">
-									<label class="form-label">Profile Image</label> <input
-										class="form-control" name="img" type="file">
+								<div class="mb-4">
+									<label class="form-label">Foto de perfil (Opcional)</label> 
+                                    <input class="form-control" name="img" type="file">
 								</div>
 
-
-
-
-
-
-								<button type="submit"
-									class="btn bg-primary text-white col-md-12">Register</button>
+								<button type="submit" class="btn btn-primary btn-register w-100 shadow">
+									Crear mi cuenta <i class="fa-solid fa-chevron-right ms-2"></i>
+								</button>
 							</form>
 						</div>
 
-						<div class="card-footer text-center">
-
-							have an account ? <a href="/login" class="text-decoration-none">Login
-							</a>
+						<div class="card-footer bg-white border-0 text-center pb-4">
+							<p class="text-muted">¿Ya tienes una cuenta? 
+                                <a href="/signin" class="text-primary fw-bold text-decoration-none">Inicia Sesión</a>
+                            </p>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-
 	</section>
 </body>
 </html>

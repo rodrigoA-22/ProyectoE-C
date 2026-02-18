@@ -75,9 +75,9 @@ public class UserController {
 		Cart saveCart = cartService.saveCart(pid, uid);
 
 		if (ObjectUtils.isEmpty(saveCart)) {
-			session.setAttribute("errorMsg", "Product add to cart failed");
+			session.setAttribute("errorMsg", "Error al añadir el producto al carrito");
 		} else {
-			session.setAttribute("succMsg", "Product added to cart");
+			session.setAttribute("succMsg", "Producto añadido al carrito");
 		}
 		return "redirect:/product/" + pid;
 	}
@@ -107,10 +107,20 @@ public class UserController {
 		return userDtls;
 	}
 
+
+	//Este funcia :v
+	/* 
 	@GetMapping("/orders")
-	public String orderPage(Principal p, Model m) {
+	public String orderPage(Principal p, Model m, HttpSession session) {
 		UserDtls user = getLoggedInUserDetails(p);
 		List<Cart> carts = cartService.getCartsByUser(user.getId());
+
+		// VALIDACIÓN 
+		if (carts == null || carts.isEmpty()) {
+			session.setAttribute("errorMsg", "Tu carrito está vacío. Agrega productos antes de pagar.");
+			return "redirect:/user/cart";
+		}
+
 		m.addAttribute("carts", carts);
 		if (carts.size() > 0) {
 			Double orderPrice = carts.get(carts.size() - 1).getTotalOrderPrice();
@@ -120,7 +130,46 @@ public class UserController {
 		}
 		return "/user/order";
 	}
+	*/
+	@GetMapping("/orders")
+	public String orderPage(Principal p, Model m, HttpSession session) {
 
+		UserDtls user = getLoggedInUserDetails(p);
+		List<Cart> carts = cartService.getCartsByUser(user.getId());
+
+		// 1️⃣ Carrito vacío
+		if (carts == null || carts.isEmpty()) {
+			session.setAttribute("errorMsg",
+				"Tu carrito está vacío. Agrega productos antes de pagar.");
+			return "redirect:/user/cart";
+		}
+
+		// 2️⃣ Validar stock por producto
+		for (Cart cart : carts) {
+			if (cart.getQuantity() > cart.getProduct().getStock()) {
+				session.setAttribute("errorMsg",
+					"Has superado el stock disponible del producto: "
+					+ cart.getProduct().getTitle()
+					);
+				return "redirect:/user/cart";
+			}
+		}
+
+		// Todo OK → mostrar pago
+		m.addAttribute("carts", carts);
+
+		Double orderPrice = carts.get(carts.size() - 1).getTotalOrderPrice();
+		Double totalOrderPrice = orderPrice + 250 + 100;
+
+		m.addAttribute("orderPrice", orderPrice);
+		m.addAttribute("totalOrderPrice", totalOrderPrice);
+
+		return "/user/order";
+	}
+
+
+
+	/* 
 	@PostMapping("/save-order")
 	public String saveOrder(@ModelAttribute OrderRequest request, Principal p) throws Exception {
 		// System.out.println(request);
@@ -129,6 +178,51 @@ public class UserController {
 
 		return "redirect:/user/success";
 	}
+	*/
+	
+	//Nuevo con validacion para no madar pedidos fantasmas
+	/* 
+	@PostMapping("/save-order")
+	public String saveOrder(@ModelAttribute OrderRequest request,
+							Principal p,
+							HttpSession session) throws Exception {
+
+		UserDtls user = getLoggedInUserDetails(p);
+		List<Cart> carts = cartService.getCartsByUser(user.getId());
+
+		if (carts == null || carts.isEmpty()) {
+			session.setAttribute("errorMsg", "No puedes confirmar un pedido con el carrito vacío");
+			return "redirect:/user/cart";
+		}
+
+		orderService.saveOrder(user.getId(), request);
+		return "redirect:/user/success";
+	}
+	*/
+	@PostMapping("/save-order")
+	public String saveOrder(@ModelAttribute OrderRequest request,
+							Principal p,
+							HttpSession session) {
+
+		try {
+			UserDtls user = getLoggedInUserDetails(p);
+			List<Cart> carts = cartService.getCartsByUser(user.getId());
+
+			if (carts == null || carts.isEmpty()) {
+				session.setAttribute("errorMsg", "No puedes confirmar un pedido con el carrito vacío");
+				return "redirect:/user/cart";
+			}
+
+			orderService.saveOrder(user.getId(), request);
+			return "redirect:/user/success";
+
+		} catch (RuntimeException e) {
+			// 👉 AQUÍ atrapamos el error de stock
+			session.setAttribute("errorMsg", e.getMessage());
+			return "redirect:/user/cart";
+		}
+	}
+
 
 	@GetMapping("/success")
 	public String loadSuccess() {
@@ -164,9 +258,9 @@ public class UserController {
 		}
 
 		if (!ObjectUtils.isEmpty(updateOrder)) {
-			session.setAttribute("succMsg", "Status Updated");
+			session.setAttribute("succMsg", "Estado actualizado");
 		} else {
-			session.setAttribute("errorMsg", "status not updated");
+			session.setAttribute("errorMsg", "Estado no actualizado");
 		}
 		return "redirect:/user/user-orders";
 	}
@@ -180,9 +274,9 @@ public class UserController {
 	public String updateProfile(@ModelAttribute UserDtls user, @RequestParam MultipartFile img, HttpSession session) {
 		UserDtls updateUserProfile = userService.updateUserProfile(user, img);
 		if (ObjectUtils.isEmpty(updateUserProfile)) {
-			session.setAttribute("errorMsg", "Profile not updated");
+			session.setAttribute("errorMsg", "Perfil no actualizado");
 		} else {
-			session.setAttribute("succMsg", "Profile Updated");
+			session.setAttribute("succMsg", "Perfil actualizado");
 		}
 		return "redirect:/user/profile";
 	}
@@ -199,12 +293,12 @@ public class UserController {
 			loggedInUserDetails.setPassword(encodePassword);
 			UserDtls updateUser = userService.updateUser(loggedInUserDetails);
 			if (ObjectUtils.isEmpty(updateUser)) {
-				session.setAttribute("errorMsg", "Password not updated !! Error in server");
+				session.setAttribute("errorMsg", "¡Contraseña no actualizada! Error en el servidor.");
 			} else {
-				session.setAttribute("succMsg", "Password Updated sucessfully");
+				session.setAttribute("succMsg", "Contraseña actualizada exitosamente");
 			}
 		} else {
-			session.setAttribute("errorMsg", "Current Password incorrect");
+			session.setAttribute("errorMsg", "Contraseña actual incorrecta");
 		}
 
 		return "redirect:/user/profile";

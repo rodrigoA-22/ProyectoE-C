@@ -1,0 +1,59 @@
+/* ========================================
+   ESTILOS EDICIÓN DE PRODUCTOS (ADMIN)
+   ======================================== */
+
+.card-edit-product {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.header-edit-admin {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #eef2f7;
+    padding: 25px;
+    border-radius: 15px 15px 0 0;
+}
+
+.label-admin {
+    font-weight: 700;
+    font-size: 0.8rem;
+    color: #4a5568;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.form-control-admin {
+    border-radius: 8px;
+    padding: 10px;
+    border: 1px solid #e2e8f0;
+}
+
+.form-control-admin:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.1);
+}
+
+.preview-product-img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    border-radius: 10px;
+    padding: 5px;
+    background: #fff;
+    border: 1px dashed #cbd5e1;
+}
+
+.status-row {
+    background-color: #f1f5f9;
+    padding: 12px;
+    border-radius: 10px;
+}
+
+.btn-update-p {
+    background: #0d6efd;
+    border: none;
+    padding: 12px;
+    font-weight: 700;
+    border-radius: 10px;
+}

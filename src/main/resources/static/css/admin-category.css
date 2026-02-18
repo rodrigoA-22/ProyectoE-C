@@ -1,0 +1,76 @@
+/* ========================================
+   ESTILOS GESTIÓN DE CATEGORÍAS
+   ======================================== */
+
+.admin-card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+.card-header-admin {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #e9ecef;
+    font-weight: 700;
+    color: #334155;
+    padding: 20px;
+}
+
+/* Formulario lateral */
+.form-label-bold {
+    font-weight: 600;
+    color: #475569;
+    font-size: 0.85rem;
+}
+
+.status-group {
+    background: #f1f5f9;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+/* Tabla de Categorías */
+.category-table img {
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+}
+
+.table thead th {
+    background-color: #f8f9fa;
+    color: #64748b;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    border-top: none;
+}
+
+.table tbody td {
+    vertical-align: middle;
+    color: #334155;
+    font-weight: 500;
+}
+
+/* Botones de Acción */
+.btn-action {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 8px;
+}
+
+/* Paginación */
+.pagination .page-link {
+    border: none;
+    color: #64748b;
+    border-radius: 8px;
+    margin: 0 2px;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #0d6efd;
+    box-shadow: 0 4px 10px rgba(13, 110, 253, 0.2);
+}

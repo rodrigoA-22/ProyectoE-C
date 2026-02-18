@@ -23,10 +23,10 @@ public class OrderAddress {
 	private String mobileNo;
 
 	private String address;
-
-	private String city;
-
-	private String state;
+	//cambio de city
+	private String district;
+	//cambio de state
+	private String department;
 
 	private String pincode;
 

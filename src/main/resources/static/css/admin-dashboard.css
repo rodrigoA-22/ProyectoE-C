@@ -1,0 +1,53 @@
+/* ========================================
+   ESTILOS DASHBOARD ADMINISTRATIVO
+   ======================================== */
+
+.dashboard-title {
+    font-weight: 800;
+    color: #2c3e50;
+    letter-spacing: -1px;
+    margin-bottom: 40px;
+}
+
+.card-dash {
+    border: none;
+    border-radius: 20px;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    background: #ffffff;
+    cursor: pointer;
+    height: 100%;
+}
+
+.card-dash:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1) !important;
+}
+
+.card-dash i {
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+}
+
+.card-dash:hover i {
+    transform: scale(1.1);
+}
+
+.card-dash h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0;
+}
+
+/* Colores temáticos por acción */
+.text-admin-blue { color: #3498db; }
+.text-admin-orange { color: #e67e22; }
+.text-admin-green { color: #27ae60; }
+.text-admin-purple { color: #9b59b6; }
+.text-admin-red { color: #e74c3c; }
+
+.bg-icon-soft {
+    padding: 30px;
+    border-radius: 20px;
+    display: inline-block;
+    width: 100%;
+}

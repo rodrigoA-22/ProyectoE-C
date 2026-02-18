@@ -1,0 +1,67 @@
+/* ========================================
+   ESTILOS DE REGISTRO DE USUARIO
+   ======================================== */
+
+.register-page {
+    background-color: #f8f9fa;
+    min-height: 90vh;
+}
+
+.card-register {
+    border: none !important;
+    border-radius: 20px !important;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.08) !important;
+}
+
+.register-icon {
+    width: 50px;
+    height: 50px;
+    background: #e7f0ff;
+    color: #0d6efd;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 10px;
+    font-size: 20px;
+}
+
+.form-label {
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: #495057;
+    margin-bottom: 5px;
+}
+
+.form-control {
+    border-radius: 8px;
+    padding: 10px 15px;
+    border: 1px solid #dee2e6;
+    font-size: 0.95rem;
+}
+
+.form-control:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.1);
+}
+
+.btn-register {
+    padding: 12px;
+    font-weight: 700;
+    border-radius: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 20px;
+}
+
+/* Estilo para los errores de validación de tu script */
+label.error {
+    color: #dc3545;
+    font-size: 0.75rem;
+    margin-top: 4px;
+    font-weight: 500;
+}
+
+input.error {
+    border-color: #dc3545 !important;
+}

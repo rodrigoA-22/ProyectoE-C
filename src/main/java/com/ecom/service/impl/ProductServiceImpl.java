@@ -122,7 +122,8 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public Page<Product> searchProductPagination(Integer pageNo, Integer pageSize, String ch) {
 		Pageable pageable = PageRequest.of(pageNo, pageSize);
-		return productRepository.findByTitleContainingIgnoreCaseOrCategoryContainingIgnoreCase(ch, ch, pageable);
+		//Retorna el nuevo metodo
+		return productRepository.findByIsActiveTrueAndTitleContainingIgnoreCaseOrIsActiveTrueAndCategoryContainingIgnoreCase(ch, ch, pageable);
 	}
 
 	@Override
@@ -139,6 +140,8 @@ public class ProductServiceImpl implements ProductService {
 		return pageProduct;
 	}
 
+	//redundante para el filtro
+	
 	@Override
 	public Page<Product> searchActiveProductPagination(Integer pageNo, Integer pageSize, String category, String ch) {
 
@@ -155,5 +158,6 @@ public class ProductServiceImpl implements ProductService {
 //		}
 		return pageProduct;
 	}
+	
 
 }

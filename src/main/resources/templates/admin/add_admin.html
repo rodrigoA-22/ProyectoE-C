@@ -1,104 +1,105 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-	th:replace="~{base::layout(~{::section})}">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::section})}">
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+    <meta charset="UTF-8">
+    <title>Agregar Administrador | Admin Panel</title>
 </head>
 <body>
-	<section>
-		<div class="container mt-5 p-5">
-			<div class="row">
+    <section>
+        <link rel="stylesheet" href="/css/admin-forms.css">
 
-				<div class="col-md-7 p-2 offset-md-2">
-					<div class="card shadow p-3 mb-5 bg-body-tertiary rounded">
-						<div class="card-header text-center">
-							<p class="fs-4 text-center">Add Admin</p>
-							<th:block th:if="${session.succMsg}">
-								<p class="text-success fw-bold">[[${session.succMsg}]]</p>
-								<th:block th:text="${@commnServiceImpl.removeSessionMessage()}"></th:block>
-							</th:block>
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-md-10 col-lg-8">
+                    
+                    <div class="admin-form-card shadow-sm">
+                        <div class="admin-header text-center">
+                            <i class="fa-solid fa-user-shield fa-2x text-primary mb-2"></i>
+                            <h4>Registrar Nuevo Administrador</h4>
+                            
+                            <!-- Mensajes de Feedback -->
+                            <div th:if="${session.succMsg}" class="alert alert-success border-0 py-2 mt-3 small">
+                                <i class="fa-solid fa-check-circle me-2"></i> [[${session.succMsg}]]
+                                <th:block th:text="${@commnServiceImpl.removeSessionMessage()}"></th:block>
+                            </div>
+                            <div th:if="${session.errorMsg}" class="alert alert-danger border-0 py-2 mt-3 small">
+                                <i class="fa-solid fa-exclamation-circle me-2"></i> [[${session.errorMsg}]]
+                                <th:block th:text="${@commnServiceImpl.removeSessionMessage()}"></th:block>
+                            </div>
+                        </div>
 
-							<th:block th:if="${session.errorMsg}">
-								<p class="text-danger fw-bold">[[${session.errorMsg}]]</p>
-								<th:block th:text="${@commnServiceImpl.removeSessionMessage()}"></th:block>
-							</th:block>
-						</div>
-						<div class="card-body">
-							<form action="/admin/save-admin" enctype="multipart/form-data"
-								method="post">
-								<div class="row">
-									<div class="col">
-										<label class="form-label">Full Name</label> <input required
-											class="form-control" name="name" type="text">
-									</div>
+                        <div class="card-body p-4 p-md-5">
+                            <form action="/admin/save-admin" enctype="multipart/form-data" method="post" id="adminRegister">
+                                
+                                <div class="section-divider">Información de Cuenta</div>
+                                <div class="row g-3 mb-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Nombre Completo</label>
+                                        <input required class="form-control" name="name" type="text" placeholder="Nombre y Apellidos">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Correo Electrónico</label>
+                                        <input required class="form-control" name="email" type="email" placeholder="admin@tienda.com">
+                                    </div>
+                                </div>
 
-									<div class="col">
-										<label class="form-label">Mobile Number</label> <input
-											required class="form-control" name="mobileNumber"
-											type="number">
-									</div>
+                                <div class="row g-3 mb-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Teléfono</label>
+                                        <input required class="form-control" name="mobileNumber" type="text" placeholder="987654321">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Foto de Perfil</label>
+                                        <input class="form-control" name="img" type="file">
+                                    </div>
+                                </div>
 
-								</div>
+                                <div class="section-divider">Ubicación</div>
+                                <div class="row g-3 mb-3">
+                                    <div class="col-md-8">
+                                        <label class="form-label">Dirección</label>
+                                        <input required class="form-control" name="address" type="text">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-label">Distrito</label>
+                                        <input required class="form-control" name="district" type="text">
+                                    </div>
+                                </div>
 
-								<div class="mb-3">
-									<label class="form-label">Email</label> <input required
-										class="form-control" name="email" type="email">
-								</div>
+                                <div class="row g-3 mb-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Departamento</label>
+                                        <input required class="form-control" name="department" type="text">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Código Postal</label>
+                                        <input required class="form-control" name="pincode" type="text">
+                                    </div>
+                                </div>
 
+                                <div class="section-divider">Credenciales</div>
+                                <div class="row g-3 mb-4">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Contraseña</label>
+                                        <input required class="form-control" name="password" type="password" id="pass">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Confirmar Contraseña</label>
+                                        <input required class="form-control" name="cpassword" type="password">
+                                    </div>
+                                </div>
 
-								<div class="row">
-									<div class="col">
-										<label class="form-label">Address</label> <input required
-											class="form-control" name="address" type="text">
-									</div>
-
-									<div class="col">
-										<label class="form-label">City</label> <input required
-											class="form-control" name="city" type="text">
-									</div>
-
-								</div>
-
-								<div class="row">
-									<div class="col">
-										<label class="form-label">State</label> <input required
-											class="form-control" name="state" type="text">
-									</div>
-
-									<div class="col">
-										<label class="form-label">Pincode</label> <input required
-											class="form-control" name="pincode" type="number">
-									</div>
-
-								</div>
-
-								<div class="row">
-									<div class="col">
-										<label class="form-label">Password</label> <input required
-											class="form-control" name="password" type="password">
-									</div>
-									<div class="col">
-										<label class="form-label">Confirm Password</label> <input
-											required class="form-control" name="cpassword"
-											type="password">
-									</div>
-								</div>
-								<div class="mb-3">
-									<label class="form-label">Profile Image</label> <input
-										class="form-control" name="img" type="file">
-								</div>
-								<button type="submit"
-									class="btn bg-primary text-white col-md-12">Register</button>
-							</form>
-						</div>
-
-
-					</div>
-				</div>
-			</div>
-		</div>
-
-	</section>
+                                <div class="mt-4">
+                                    <button type="submit" class="btn btn-admin text-white w-100 shadow-sm">
+                                        <i class="fa-solid fa-save me-2"></i> Crear Administrador
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </body>
 </html>
